@@ -1,0 +1,5 @@
+#ignore matlab autosave files
+
+*.as
+
+Processed_Data/GFX/*.mat
