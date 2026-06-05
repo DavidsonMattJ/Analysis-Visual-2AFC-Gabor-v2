@@ -20,7 +20,7 @@ switch subjID
 
     case '10111' %p02; ! Revisit, poor gait extraction on early slow trials.
         
-        badtrials=[22,68,93,100,201];
+        badtrials=[5,22,26,68,73,80,81,93,100,201];
     
     
     case '10159' % p03

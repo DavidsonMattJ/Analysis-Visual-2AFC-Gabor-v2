@@ -42,7 +42,7 @@ tr= table((1:length(pfols))',{pfols(:).name}' );
 disp(tr)
 
 %%
-for ippant =1:length(pfols)
+for ippant =3%1:length(pfols)
 
 
     cd(procdatadir)
@@ -127,12 +127,12 @@ for ippant =1:length(pfols)
         
         if wlkSpeed==1
             wlkPrint = 'slow';
-            minmaxlength_samps =[.15 .75].*Fs;
+            minmaxlength_samps =[.25 1.1].*Fs;
 
         else
             wlkPrint = 'normal';
             %flag gait durations outside this range (in sec) for review.
-            minmaxlength_samps =[.25 .75].*Fs;
+            minmaxlength_samps =[.25 .95].*Fs;
 
         end
         
@@ -356,7 +356,31 @@ for ippant =1:length(pfols)
             if any(gaitszs>minmaxlength_samps(2) ) || any(gaitszs<minmaxlength_samps(1) )
 
                 disp(['!check gait size trial ' num2str(itrial) ': ' subjID]);
+            
 
+                % fix troughs manually? 
+                
+                hold on;
+                %%
+                continueQ ='n';
+                while strcmp(continueQ, 'n')
+                figure(10); clf;
+                plot(1:length(trialD), trialD); hold on;
+                plot(locs_trtr, trialD(locs_trtr), 'ob')
+                shg
+                shg
+                removetroughs= input('Which troughs to remove? ');
+                locs_trtr(removetroughs)=[];
+                addtroughs= input('Any troughs to add? input EXACT value (GUI): ');
+                locs_trtr= [locs_trtr, addtroughs];
+                % confirm
+                figure(10); clf;
+                plot(1:length(trialD), trialD); hold on;
+                plot(locs_trtr, trialD(locs_trtr), 'ob')
+                shg
+                continueQ=input('Continue [y/n]? ', 's'); % string
+                end
+                % collect user input.
             end
             %%
 

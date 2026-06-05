@@ -38,7 +38,7 @@ end
 %                     critical-value bands for inference against observed R².
 % testFull_perm = 0 : observed-data frequency scan only (fast).
 %                     ShuffCV output fields will be saved as all-NaN placeholders.
-testFull_perm = 1; % will take approx 10 mins per DV
+testFull_perm = 0; % will take approx 10 mins per DV
 
 % -------------------------------------------------------------------------
 %  File-name suffix (must match j4b / j5 output files)
@@ -99,7 +99,7 @@ end
 % =========================================================================
 testDVs = {'Accuracy','RT','dprime','crit','HR','FA','counts','counts'};
 
-for testtype = [5];%,7]
+for testtype = [1,3,4,7];%,7]
 
     usebin = 1;   % 1 = binned data (recommended); 0 = unbinned (all 100 gait% points)
 
@@ -138,6 +138,7 @@ for testtype = [5];%,7]
     
     cfg.omitPpants=[]; % none    
     % cfg.omitPpants= [27,36,32,8,31,3,19];% composite from poor gait
+    
     % extraction
     %% Apply exclusions --------------------------------------------------------
     % Rows are removed from local copies only; source arrays are unaffected,

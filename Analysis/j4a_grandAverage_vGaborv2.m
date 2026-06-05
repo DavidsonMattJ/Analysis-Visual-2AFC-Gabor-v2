@@ -33,7 +33,8 @@ avStepDuration = nan(nsubs,2); % two speeds.
 for ippant = 1:nsubs
     cd(procdatadir)
     load(pfols(ippant).name, 'subjID', 'trial_summaryTable', ...
-        'gait_ts_gData', 'gait_ts_resamp', 'doubgait_ts_resamp');
+        'gait_ts_gData', 'gait_ts_resamp', 'doubgait_ts_resamp',...
+        'gait_ts_raw', 'doubgait_ts_raw');
 
     subjIDs{ippant} = subjID;
     disp(['Grand average: ' subjID]);
@@ -42,13 +43,26 @@ for ippant = 1:nsubs
     slowsteps   = gait_ts_gData.walkSpeed == 1;
     normalsteps = gait_ts_gData.walkSpeed == 2;
 
-    GFX_headY(ippant, 1).gc     = mean(gait_ts_resamp(slowsteps,   :), 1, 'omitnan');
-    GFX_headY(ippant, 2).gc     = mean(gait_ts_resamp(normalsteps, :), 1, 'omitnan');
-    GFX_headY(ippant, 3).gc     = mean(gait_ts_resamp,              1, 'omitnan');
+    
+%raw and 
+    GFX_headY(ippant, 1).gc_raw= mean(gait_ts_raw(slowsteps,   :), 1, 'omitnan');
+    GFX_headY(ippant, 2).gc_raw= mean(gait_ts_raw(normalsteps, :), 1, 'omitnan');
+    GFX_headY(ippant, 3).gc_raw= mean(gait_ts_raw,              1, 'omitnan');
 
-    GFX_headY(ippant, 1).doubgc = mean(doubgait_ts_resamp(slowsteps,   :), 1, 'omitnan');
-    GFX_headY(ippant, 2).doubgc = mean(doubgait_ts_resamp(normalsteps, :), 1, 'omitnan');
-    GFX_headY(ippant, 3).doubgc = mean(doubgait_ts_resamp,              1, 'omitnan');
+    GFX_headY(ippant, 1).doubgc_raw= mean(doubgait_ts_raw(slowsteps,   :), 1, 'omitnan');
+    GFX_headY(ippant, 2).doubgc_raw= mean(doubgait_ts_raw(normalsteps, :), 1, 'omitnan');
+    GFX_headY(ippant, 3).doubgc_raw= mean(doubgait_ts_raw,              1, 'omitnan');
+    
+%resampled
+    GFX_headY(ippant, 1).gc_resamp     = mean(gait_ts_resamp(slowsteps,   :), 1, 'omitnan');
+    GFX_headY(ippant, 2).gc_resamp     = mean(gait_ts_resamp(normalsteps, :), 1, 'omitnan');
+    GFX_headY(ippant, 3).gc_resamp     = mean(gait_ts_resamp,              1, 'omitnan');
+
+    GFX_headY(ippant, 1).doubgc_resamp = mean(doubgait_ts_resamp(slowsteps,   :), 1, 'omitnan');
+    GFX_headY(ippant, 2).doubgc_resamp = mean(doubgait_ts_resamp(normalsteps, :), 1, 'omitnan');
+    GFX_headY(ippant, 3).doubgc_resamp = mean(doubgait_ts_resamp,              1, 'omitnan');
+    
+
 
     % Average stride duration: sum of mean L-step and mean R-step durations
     Ltrials_ts = strcmp(gait_ts_gData.gaitFeet, 'LR');

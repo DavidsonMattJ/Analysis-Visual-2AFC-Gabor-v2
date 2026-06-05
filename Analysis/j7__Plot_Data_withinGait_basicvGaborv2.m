@@ -151,7 +151,7 @@ if jobs.plotBasic_superscript
     cfg.plotlevel    = 'GFX';          % 'GFX' = group; 'PFX' = per participant
     cfg.usebin       = 1;              % 1 = binned; 0 = all 100 gait% points
     cfg.type         = 'Target';       % 'Target' | 'Response' (Response not fully supported)
-    cfg.DV           = 'HR';           % see options above
+    cfg.DV           = 'counts';           % see options above
     cfg.binDV        = 'Calc';         % 'Calc' = pooled-bin SDT; 'Av' = within-bin mean
     cfg.plotCOL      = 'b';
     cfg.fitCOL       = 'b';

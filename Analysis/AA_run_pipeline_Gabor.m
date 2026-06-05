@@ -27,7 +27,7 @@ jobs.stage1_import        = 0;   % j0, j1
 jobs.stage2_gaitAnnot     = 0;   % j2, j2B, j2C, j3
 jobs.stage3_crunch        = 0;   % j4a, j4b
 jobs.stage4_stats         = 0;   % j5, j6, j9
-jobs.stage5_figures       = 0;   % j7, j8, j10 + grand-average plots
+jobs.stage5_figures       = 1;   % j7, j8, j10 + grand-average plots
 % =========================================================================
 
 
@@ -98,10 +98,10 @@ if jobs.stage5_figures
     % Inspection plot – useful before finalising figure scripts:
     plotPFX_forInspection; % staircases and Acc, HR, FA.
     % plotPFX_exclusionCheck_targetCounts% gaitresolved
-    % plotPFX_exclusionCheck_byDV; % gaitresolved
+    plotPFX_exclusionCheck_byDV; % gaitresolved
     % 
     % % Main figure scripts:
-    % j7__Plot_Data_withinGait_basicvAUD;
+    j7__Plot_Data_withinGait_basicvGaborv2;
     % j8__Plot_Data_FourierFits_GFX_vAUD;
     % j10__Plot_Data_PFX_FourierFits_phase_prev_vAud;
     % 
@@ -115,9 +115,9 @@ end
 if jobs.stage6_MSFigures
     fprintf('\n=== STAGE 5: Figures ===\n');
     
-    % job_MSplot2_grandAverageSummary; % shows step dur, Acc, RT (box and scatter).
+    job_MSplot_grandaverageSummary_vGabor; % shows step dur, Acc, RT (box and scatter).
     % 
-    % job_MSplot3_intraStride_v1; % shows step and stride for HR, cps for HR and targ counts overlaid
+    job_MSplot3_intraStride_vGabor; % shows step and stride for HR, cps for HR and targ counts overlaid
 
 end
 
